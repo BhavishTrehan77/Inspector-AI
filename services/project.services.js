@@ -1,5 +1,6 @@
 const Project = require("../models/Project.model")
 const { User } = require("../models/user.models")
+const { GetRepository } = require("./github.services")
 
 const CreateProject=async(userId,data)=>{
     const{name,description,githubOwner,githubRepo,githubUrl}=data
@@ -9,6 +10,10 @@ const CreateProject=async(userId,data)=>{
     }
     if(!name || !githubOwner || !githubRepo || !githubUrl){
         throw new Error("required fields not defined")
+    }
+    const repo=await GetRepository(githubOwner,githubRepo)
+    if(!repo){
+        throw new Error("repo not found")
     }
     const newProject=await Project.create({
        
