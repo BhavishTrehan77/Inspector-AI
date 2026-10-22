@@ -49,11 +49,12 @@ const GetFileContent=async(owner,repo,path)=>{
          throw new Error("Requested path is not a file")
     }
     const content=Buffer.from(data.content,"base64").toString("utf-8")
+    // this content=Buffer is the step were we are reading the data from the that github file
 
     return{
         path:data.path,
         content,
-        sha:data.sha
+        sha:data.sha // this sha is basically for the updation suppose we updat anything in  the existing file so we have to etch that changes here also
     }
 
 
@@ -66,7 +67,7 @@ const GetMultipleFiles=async(owner,repo,files)=>{
             results.push(file)
         }catch(err){
              console.log(`Failed to fetch file: ${path}`)
-            console.log(error.message)
+            console.log(err.message)
         }
     }
     return results
