@@ -37,9 +37,9 @@ const refreshToken=async(req,resp)=>{
     }
     const token=AuthHeader.split(" ")[1]
     const decoded=jwt.verify(token,process.env.RefSecKey)
-    const genRefToken=jwt.sign({id:decoded.id},process.env.AccSecKey,{expiresIn:"2d"})
+    const genAccToken=jwt.sign({id:decoded.id},process.env.AccSecKey,{expiresIn:"15m"})
    return resp.status(200).json({
-            accessToken: genRefToken
+            accessToken: genAccToken
         })
     }
     catch(err){

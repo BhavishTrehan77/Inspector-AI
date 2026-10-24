@@ -12,7 +12,7 @@ const GetRepository=async(owner,repo)=>{
         if(response.status===404){
             throw new Error("repository not found")
         }
-        if(response.status=403){
+        if(response.status==403){
             throw new Error("Github api rate limit or access denied")
         }
         throw new Error("github api error")

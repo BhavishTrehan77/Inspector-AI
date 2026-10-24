@@ -68,7 +68,8 @@ const SearchCodebase=async(query,projectId)=>{
             }
         }
     ])
-    return results
+    const filteredResults=results.filter(result=>result.score>=0.70)
+    return filteredResults
 }
 
 
